@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f6fb" />
+    <title>MG CEO를 위한 키워드 뉴스</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero-card">
+        <div class="hero-topline">매일 오전 8시 · 오후 1시 자동 갱신</div>
+        <h1>MG CEO를 위한 키워드 뉴스</h1>
+        <p class="hero-desc">새마을금고, 농협, 은행권 뉴스를 제목 중심으로 빠르게 확인하고, 필요한 기사만 바로 열어볼 수 있습니다.</p>
+
+        <div class="controls" aria-label="글자 크기 조절">
+          <span class="controls-label">글자 크기</span>
+          <div class="control-buttons">
+            <button type="button" class="size-btn" data-size="small" aria-label="글자 작게">작게</button>
+            <button type="button" class="size-btn active" data-size="medium" aria-label="글자 기본">기본</button>
+            <button type="button" class="size-btn" data-size="large" aria-label="글자 크게">크게</button>
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div>
+            <span class="meta-label">업데이트</span>
+            <strong id="updatedAt">불러오는 중</strong>
+          </div>
+          <div>
+            <span class="meta-label">오늘 기사 수</span>
+            <strong id="articleCount">-</strong>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="section-card spotlight-card" aria-labelledby="spotlight-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">핵심 요약</p>
+              <h2 id="spotlight-title">오늘의 핵심 뉴스 TOP 3</h2>
+            </div>
+          </div>
+          <ol id="topStories" class="top-stories"></ol>
+        </section>
+
+        <section class="section-card" aria-labelledby="saemaeul-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">1순위</p>
+              <h2 id="saemaeul-title">새마을금고</h2>
+            </div>
+            <span class="count-pill" id="count-saemaeul">0건</span>
+          </div>
+          <ul id="list-saemaeul" class="news-list"></ul>
+        </section>
+
+        <section class="section-card" aria-labelledby="nonghyup-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">2순위</p>
+              <h2 id="nonghyup-title">농협</h2>
+            </div>
+            <span class="count-pill" id="count-nonghyup">0건</span>
+          </div>
+          <ul id="list-nonghyup" class="news-list"></ul>
+        </section>
+
+        <section class="section-card" aria-labelledby="bank-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">3순위</p>
+              <h2 id="bank-title">은행권</h2>
+            </div>
+            <span class="count-pill" id="count-bank">0건</span>
+          </div>
+          <ul id="list-bank" class="news-list"></ul>
+        </section>
+      </main>
+    </div>
+
+    <template id="storyTemplate">
+      <li>
+        <a class="story-link" target="_blank" rel="noopener noreferrer">
+          <span class="story-title"></span>
+          <span class="story-meta"></span>
+        </a>
+      </li>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
