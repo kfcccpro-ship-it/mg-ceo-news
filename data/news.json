@@ -1,176 +1,312 @@
 {
-  "updatedAt": "2026-03-29T05:45:38.471Z",
-  "totalCount": 24,
-  "topStories": [
+  "updatedAt": "2026-03-29T16:36:34.370Z",
+  "updatedLabel": "2026. 3. 30. AM 1:36:34",
+  "sections": [
     {
-      "title": "구미농협·제주위미농협, 고향사랑기부금 1000만원 상호기부",
-      "link": "https://www.m-i.kr/news/articleView.html?idxno=1359268",
-      "source": "m-i.kr",
-      "pubDate": "2026-03-29T05:42:00.000Z"
+      "key": "saemaeul",
+      "name": "새마을금고",
+      "items": [
+        {
+          "title": "충북신보· MG새마을금고 , ‘30억원 특별보증’협약 체결",
+          "description": "뉴데일리 양승갑 기자 = 충북신용보증재단(이사장 김창순, 이하 충북신보)과 새마을금고중앙회 ... 신청을 원하는 소기업 등은 ‘보증드림’ 앱(또는 https://untact.koreg. or .kr 접속)을 통해 간편하게 신청할 수 있으며, 만...",
+          "link": "https://cc.newdaily.co.kr/site/data/html/2025/07/01/2025070100470.html",
+          "pubDate": "Wed, 02 Jul 2025 05:32:00 +0900",
+          "displayDate": "2025. 7. 2. AM 5:32:00",
+          "source": "cc.newdaily.co.kr"
+        },
+        {
+          "title": "충북신보, MG새마을금고 와 30억원 특별보증 협약 체결",
+          "description": "▲ 충북신보는 MG새마을금고 충북본부와 30억원 특별보증 협약을 체결했다./충북신보 제공 충북신용보증재단(이하 충북신보)과 새마을금고중앙회 충북지역본부(이하 새마을금고 )는 1일 내수 침체...",
+          "link": "http://www.cctimes.kr/news/articleView.html?idxno=853747",
+          "pubDate": "Tue, 01 Jul 2025 20:48:00 +0900",
+          "displayDate": "2025. 7. 1. PM 8:48:00",
+          "source": "cctimes.kr"
+        },
+        {
+          "title": "충북신보· MG새마을금고 , 30억원 특별보증 협약 체결",
+          "description": "충북신용보증재단(이하 충북신보)과 새마을금고중앙회 충북지역본부(본부장 김인환, 이하 새마을금고 )가... 신청은 '보증드림' 앱 또는 온라인 웹사이트(https://untact.koreg. or .kr)를 통해 비대면으로 가능하며, 디지털...",
+          "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2352798",
+          "pubDate": "Tue, 01 Jul 2025 18:08:00 +0900",
+          "displayDate": "2025. 7. 1. PM 6:08:00",
+          "source": "ccdailynews.com"
+        },
+        {
+          "title": "충북신보· MG새마을금고 '30억 원 특별보증' 맞손",
+          "description": "새마을금고중앙회 2억원 출연… 총 30억원 특별보증 지원 ［충북일보］ 충북신용보증재단(이사장 김창순)... 신청을 원한다면 '보증드림' 앱(또는 https://untact.koreg. or .kr 접속)을 통해 간편하게 신청할 수 있다. 만 65세...",
+          "link": "https://www.inews365.com/news/article.html?no=873811",
+          "pubDate": "Tue, 01 Jul 2025 16:50:00 +0900",
+          "displayDate": "2025. 7. 1. PM 4:50:00",
+          "source": "inews365.com"
+        },
+        {
+          "title": "충북신보- MG새마을금고 '30억원 특별보증' 협약",
+          "description": "［중부매일 이지효 기자］ 충북신용보증재단(이사장 김창순, 이하 충북신보)과 새마을금고중앙회 ... 신청을 원하는 소기업 등은 '보증드림' 앱(또는 https://untact.koreg. or .kr 접속)을 통해 간편하게 신청할 수 있으며 만 65세...",
+          "link": "https://www.jbnews.com/news/articleView.html?idxno=1481661",
+          "pubDate": "Tue, 01 Jul 2025 15:50:00 +0900",
+          "displayDate": "2025. 7. 1. PM 3:50:00",
+          "source": "jbnews.com"
+        },
+        {
+          "title": "ESG 시대 새마을금고 , 코로나19 극복·사회공헌활동 박차",
+          "description": "새마을금고 와 중앙회 임직원들은 일회용품 사용을 줄이기 위한 사무실 내 개인컵... MG새마을금고 재단 주최로 진행되는 이번 사업은 어려운 청년층에게 주거비를...",
+          "link": "http://www.breaknews.com/835964",
+          "pubDate": "Mon, 27 Sep 2021 09:34:00 +0900",
+          "displayDate": "2021. 9. 27. AM 9:34:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "MG새마을금고 재단, 청년 주거안정 위한 지원사업",
+          "description": "자세한 참여방법은 MG새마을금고 재단 홈페이지(www.kfccf. or .kr) 및 내집잡기 블로그를 (blog.naver.com/mghouse... 한편 MG새마을금고 재단은 새마을금고중앙회 가 출연해 2015년 출범했으며, '가장 가까이에서 이웃의 어려움을...",
+          "link": "http://www.newscj.com/news/articleView.html?idxno=519676",
+          "pubDate": "Thu, 10 May 2018 12:32:00 +0900",
+          "displayDate": "2018. 5. 10. PM 12:32:00",
+          "source": "newscj.com"
+        },
+        {
+          "title": "MG새마을금고 , 홍보모델 3명 사내 선발",
+          "description": "[글로벌이코노믹 유은영 기자] MG새마을금고 중앙회 는 지난 2일 새마을금고 를 대표하는 사내모델 3명을 선발하고 위촉식을 가졌다고 밝혔다. 중앙회 는 지난 3월 일선 금고 와 중앙회 직원을 대상으로 사내모델 선발대회를...",
+          "link": "http://www.g-enews.com/ko-kr/news/article/news_all/201605041332440033659_1/article.html",
+          "pubDate": "Wed, 04 May 2016 13:37:00 +0900",
+          "displayDate": "2016. 5. 4. PM 1:37:00",
+          "source": "g-enews.com"
+        },
+        {
+          "title": "중단했던 광양시 새마을금고 제11대 임원선거 25일 실시",
+          "description": "대응과 새마을금고중앙회 로부터 선거인명부를 교부하라는 지침에 의한 법원에 이의신청을 낸 결과다고... 과 새마을금고 광영지점 2층(2투표소), 금호동주민센터 제102호(제3 투표소), 새마을금고 광양읍지점 MG 갤러...",
+          "link": "http://news.khan.co.kr/kh_news/khan_art_view.html?artid=201601201634221&code=620114",
+          "pubDate": "Wed, 20 Jan 2016 16:35:00 +0900",
+          "displayDate": "2016. 1. 20. PM 4:35:00",
+          "source": "news.khan.co.kr"
+        },
+        {
+          "title": "새마을금고중앙회 , ‘커뮤니케이션 대상’ 안전행정위원장상 수상",
+          "description": "지난 2일 서울 중구 세종대로 한국프레스센터에서 열린 시상식에서 새마을금고중앙회 는 ‘월간 MG새마을금고 ’의 창의성과 충실성을 인정받아 ‘국회 안전행정위원회 위원장상’을 수상했다. ‘월간 MG새마을금고 ’는...",
+          "link": "http://www.g-enews.com/ko-kr/news/article/news_all/201512031919513635340_1/article.html",
+          "pubDate": "Thu, 03 Dec 2015 19:44:00 +0900",
+          "displayDate": "2015. 12. 3. PM 7:44:00",
+          "source": "g-enews.com"
+        },
+        {
+          "title": "새마을금고중앙회 , 소외계층 돕기 김장· 연탄 나눔",
+          "description": "이날 봉사활동은 중앙회 직원 외에 MG 희망나눔 대학생 서포터즈 ‘영유니온’ 소속 대학생 30여명이 참여했다. 이들은 2,500kg의 김장김치와 2,000장의 연탄을 어려운 이웃에게 전달했다. 새마을금고 는 활발한...",
+          "link": "http://www.g-enews.com/ko-kr/news/article/news_all/201512021655058829086_1/article.html",
+          "pubDate": "Wed, 02 Dec 2015 17:06:00 +0900",
+          "displayDate": "2015. 12. 2. PM 5:06:00",
+          "source": "g-enews.com"
+        },
+        {
+          "title": "새마을금고 , ‘ MG 희망나눔 바자회’ 개최",
+          "description": "[글로벌이코노믹 유은영 기자] 새마을금고중앙회 (회장 신종백)는 6일 서울 은평구청 소나무 광장에서 불우이웃돕기 ‘ MG 희망나눔 바자회’를 개최했다. 서울 은평구 새마을금고 협의회가 주관하는 “ MG 희망나눔...",
+          "link": "http://www.g-enews.com/ko-kr/news/article/news_all/201511061754449897731_1/article.html",
+          "pubDate": "Fri, 06 Nov 2015 19:15:00 +0900",
+          "displayDate": "2015. 11. 6. PM 7:15:00",
+          "source": "g-enews.com"
+        }
+      ]
     },
     {
-      "title": "농협 대구본부, 동심협력 워크숍 개최",
-      "link": "https://www.kbmaeil.com/article/20260329500301",
-      "source": "kbmaeil.com",
-      "pubDate": "2026-03-29T05:34:00.000Z"
+      "key": "nonghyup",
+      "name": "농협",
+      "items": [
+        {
+          "title": "산불 이재민과 함께한 농협 , 산업 넘어 공동체로",
+          "description": "전국의 농축협, 농협중앙회 와 계열사, 임직원까지 자발적으로 모금에 동참했다.... NH농협 은행 등 금융 계열사 또한 총 1,800억 원의 유동성 지원을 통해 피해 농업인의...",
+          "link": "http://www.breaknews.com/1130682",
+          "pubDate": "Mon, 07 Jul 2025 10:40:00 +0900",
+          "displayDate": "2025. 7. 7. AM 10:40:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "407억 쏟아부은 농협 식 ‘착한 경영’",
+          "description": "“ 농협 이야말로 원래 ESG 전문 아닙니까?” 농협중앙회 관계자가 농협 의... 은행 중에서는 NH농협 은행 의 활약도 주목할 만하다. 농촌 일손돕기 9,374시간, 493억 원...",
+          "link": "http://www.breaknews.com/1127935",
+          "pubDate": "Wed, 25 Jun 2025 16:56:00 +0900",
+          "displayDate": "2025. 6. 25. PM 4:56:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "농협중앙회 , 설 명절 맞이 ‘고향사랑기부제’ 출범 2년차 기념행사 성...",
+          "description": "농협중앙회 장, 이상민 행정안전부 장관, 이석용 NH농협 은행 장, 가수 강혜연... his or her hometown or address, the accumulated donations are used for the local government's residents' welfare...",
+          "link": "http://www.breaknews.com/1014439",
+          "pubDate": "Tue, 06 Feb 2024 16:14:00 +0900",
+          "displayDate": "2024. 2. 6. PM 4:14:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "NH농협 은행 경남본부, 역대 최대금액 8억 원 기부",
+          "description": "농협중앙회 경남본부장, 조근수 NH농협 은행 경남본부장, 강기철 경남... Depending on the cumulative donation amount, they are divided into ▲ Green (KRW 100 million or more) ▲ Silver (KRW 300...",
+          "link": "http://www.breaknews.com/1003758",
+          "pubDate": "Tue, 12 Dec 2023 15:50:00 +0900",
+          "displayDate": "2023. 12. 12. PM 3:50:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "[금융권 수장 교체] [ NH농협 금융] 농협 손보 최문섭 대표, 연임 or 교체?",
+          "description": "농협은행 부터 농협중앙회 , 농협 경제지주 등을 거쳐 지난 2022년 1월 NH농협 손보 대표직에 올랐다. 최 대표는 취임 후 재임 기간 동안 NH농협 손보를 안정적으로 이끌었다. 취임 첫 해인 2022년 NH농협 손보 순이익은 전년...",
+          "link": "https://www.topdaily.kr/articles/95801",
+          "pubDate": "Wed, 06 Dec 2023 15:04:00 +0900",
+          "displayDate": "2023. 12. 6. PM 3:04:00",
+          "source": "topdaily.kr"
+        },
+        {
+          "title": "김승남 의원 “농업지원사업비 상향 저지한다는 농협 노조..이익에만 골...",
+          "description": "NH 농협 지부 노조위원장 당선인은 당선자 소식지 1 호를 통해 “ 농협중앙회 ... 결과 농협은행 의 매출액은 2013 년 12 조 16 억 원에서 2023 년 17 조 8,110 억 원으로 무려...",
+          "link": "http://www.breaknews.com/992461",
+          "pubDate": "Mon, 16 Oct 2023 09:40:00 +0900",
+          "displayDate": "2023. 10. 16. AM 9:40:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "충북 농협 , ‘ NH 고향사랑기부예·적금’ 가입 판촉",
+          "description": "이정표 농협중앙회 충북본부장과 황종연 NH농협 은행 충북본부부장은 김영준... The Hometown Love Donation System is a system in which individuals donate to their hometowns or local governments...",
+          "link": "http://www.breaknews.com/942311",
+          "pubDate": "Thu, 05 Jan 2023 17:56:00 +0900",
+          "displayDate": "2023. 1. 5. PM 5:56:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "[울산소식]울산 농협 , 영농지원 발대식 개최 등",
+          "description": "이날 발대식에는 이선호 군수와 간정태 군의회 의장, 이정한 농협중앙회 울산본부장, 황석웅 NH농협 은행 ... ev. or .kr)을 통해 신청한다. 보조금 신청은 4월 26일부터 가능하며, 차량 출고 순으로 보조금이 지원된다. 이번...",
+          "link": "http://www.newsis.com/view/?id=NISX20220420_0001840856&cID=10814&pID=10800",
+          "pubDate": "Wed, 20 Apr 2022 15:32:00 +0900",
+          "displayDate": "2022. 4. 20. PM 3:32:00",
+          "source": "newsis.com"
+        },
+        {
+          "title": "[울산소식]울산 농협 , 탄소 중립 실천 캠페인 등",
+          "description": "이날 캠페인엔 농협중앙회 최정훈 울산지역본부장, NH농협 은행 황석웅 영업본부장, 농협 생명 김명일... 신청서는 울산테크노파크 홈페이지(www.utp. or .kr) 또는 기업지원사업 관리시스템(platform.utp. or .kr) 사업공고에서...",
+          "link": "http://www.newsis.com/view/?id=NISX20210609_0001470294&cID=10814&pID=10800",
+          "pubDate": "Wed, 09 Jun 2021 14:58:00 +0900",
+          "displayDate": "2021. 6. 9. PM 2:58:00",
+          "source": "newsis.com"
+        },
+        {
+          "title": "[울산소식]울산 농협 , 탄소 효율 그린뉴딜 ETF 가입행사 개최 등",
+          "description": "울산 농협 (본부장 최정훈)은 15일 NH농협 은행 울산영업부에서 농협중앙회 최정훈 울산지역본부장... 자세한 사항은 울산정보산업진흥원 홈페이지(www.uipa. or .kr)나 울산정보산업진흥원 UIS교육혁신센터...",
+          "link": "http://www.newsis.com/view/?id=NISX20210315_0001371038&cID=10814&pID=10800",
+          "pubDate": "Mon, 15 Mar 2021 16:08:00 +0900",
+          "displayDate": "2021. 3. 15. PM 4:08:00",
+          "source": "newsis.com"
+        },
+        {
+          "title": "농협 , 상반기 신규직원 400명 채용",
+          "description": "채용 규모는 농협중앙회 · 농협 경제지주· 농협 하나로유통· NH농협 은행 · NH농협 손해보험 등 계열사를 합해 총 400여명이다. 전형절차와 채용일정 등은 계열사별로 상이하며, 자세한 내용은 농협 홈페이지에...",
+          "link": "http://www.jemin.com/news/articleView.html?idxno=711847",
+          "pubDate": "Mon, 15 Feb 2021 18:40:00 +0900",
+          "displayDate": "2021. 2. 15. PM 6:40:00",
+          "source": "jemin.com"
+        },
+        {
+          "title": "농협 · NH농협 은행 올해 상반기 신규 직원 채용",
+          "description": "다만, 농협중앙회 와 NH농협 은행 가 지원서 접수 및 필기시험이 동일한 날짜에 진행돼 중복지원은 불가하므로 주의해야 한다. 농협 은 \"협동조합을 이끌어 나갈 인재를 선발하고자 농업·농촌에 대한 이해와 관심...",
+          "link": "http://www.kbmaeil.com/news/articleView.html?idxno=805945",
+          "pubDate": "Thu, 14 Feb 2019 20:33:00 +0900",
+          "displayDate": "2019. 2. 14. PM 8:33:00",
+          "source": "kbmaeil.com"
+        }
+      ]
     },
     {
-      "title": "신제천새마을금고, 장락지점 개점식 MG페스티벌 개최",
-      "link": "https://www.inews365.com/news/article.html?no=912547",
-      "source": "inews365.com",
-      "pubDate": "2026-03-29T05:26:00.000Z"
+      "key": "bank",
+      "name": "은행권",
+      "items": [
+        {
+          "title": "이양수 의원 “지방 은행 예산 14배 격차...지역 금융 비상등”",
+          "description": "국내 시중은행 과 지방 은행 간의 정보보호 투자 규모 격차가 충격적인 수준으로... 따르면, 은행권 내 정보보호 예산 규모가 최대 14배 가까이 차이 나는 것으로...",
+          "link": "http://www.breaknews.com/1154883",
+          "pubDate": "Mon, 20 Oct 2025 12:00:00 +0900",
+          "displayDate": "2025. 10. 20. PM 12:00:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "고령층도 모바일 금융...그래도 시중은행 ‘지점 통폐합’ 눈칫밥",
+          "description": "시중은행 들이 수요가 적은 영업점 규모를 줄이면서도 고민이 깊어지는 모양새다. 모바일 금융을 찾는... 은행권 은 자동화기기 또한 빠르게 줄이고 있다. 한국 은행 경제통계시스템 등에 따르면 국내 17개 은행 의...",
+          "link": "https://isplus.com/article/view/isp202505290311",
+          "pubDate": "Fri, 30 May 2025 07:33:00 +0900",
+          "displayDate": "2025. 5. 30. AM 7:33:00",
+          "source": "isplus.com"
+        },
+        {
+          "title": "[오늘의 금융가소식] 미래에셋생명 外",
+          "description": "◆ 우리 은행 , 2024년 새희망홀씨대출 시중은행 유일 초과 공급 우리 은행 ( 은행 장 정진완)이 2024년에... 한편, 우리 은행 은 은행권 민생금융지원방안도 충실히 이행해 참여 12개 은행 중 유일하게 당초 지원계획을 43억원...",
+          "link": "https://www.betanews.net/article/view/beta202503240102",
+          "pubDate": "Mon, 24 Mar 2025 19:32:00 +0900",
+          "displayDate": "2025. 3. 24. PM 7:32:00",
+          "source": "betanews.net"
+        },
+        {
+          "title": "신용점수 따라 대출이자 최대 2배… 철저한 관리가 재테크",
+          "description": "은행권 이용자라면 KCB 신용점수를, 그렇지 않은 경우라면 NICE신용점수를 관리하는 것이 현명하다. 금융감독원의 '금융상품 한눈에'를 보면 2025년 3월 19일 현재 신용점수가 600점 이하라면 몇군데를 빼고는 시중은행 에...",
+          "link": "https://www.kbmaeil.com/news/articleView.html?idxno=1035878",
+          "pubDate": "Wed, 19 Mar 2025 20:30:00 +0900",
+          "displayDate": "2025. 3. 19. PM 8:30:00",
+          "source": "kbmaeil.com"
+        },
+        {
+          "title": "설 맞아 중소·중견기업에 94조 6000억 규모 대출·보증 공급",
+          "description": "설을 맞아 중소·중견기업에 정책금융기관 특별대출·보증 15조 2000억 원과 은행권 금리우대 대출 79조 4000억... 서울 시내에 설치된 시중은행 ATM 기기 모습.2024.12.30.(ⓒ뉴스1, 무단 전재-재배포 금지) 또한, 설 연휴...",
+          "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148938734&call_from=naver_news",
+          "pubDate": "Fri, 17 Jan 2025 16:22:00 +0900",
+          "displayDate": "2025. 1. 17. PM 4:22:00",
+          "source": "korea.kr"
+        },
+        {
+          "title": "[심층분석] 4월 총선 명운 쥔 서울 스윙 선거구 ‘한강벨트’ 판세",
+          "description": "4%대인 시중은행 대출금리에 비하면 꽤 파격적이다. 지방 은행 도 3% 중후반대로 대환대출 금리가 변동됐다. 심지어 인터넷은행 인 카카오뱅크는 3.59%다. 조건에 따라 최저 3.33%까지도 가능하다. 카카오뱅크로 주택담보대출...",
+          "link": "http://jmagazine.joins.com/monthly/view/339236",
+          "pubDate": "Thu, 22 Feb 2024 08:46:00 +0900",
+          "displayDate": "2024. 2. 22. AM 8:46:00",
+          "source": "jmagazine.joins.com"
+        },
+        {
+          "title": "금융소비자연맹, 2023년 '10대 금융 뉴스' 발표... 1위 '가계부채'",
+          "description": "이자장사 은행 돈잔치 시중은행 들이 고금리로 인한 이자수익이 늘어나면서 사상... 이외에도 은행권 에서 허위비용 발생을 통한 횡령, 미공개 정보를 이용한...",
+          "link": "http://www.breaknews.com/1006313",
+          "pubDate": "Wed, 27 Dec 2023 08:20:00 +0900",
+          "displayDate": "2023. 12. 27. AM 8:20:00",
+          "source": "breaknews.com"
+        },
+        {
+          "title": "은행권 임직원 성과급·예대금리차 변동 원인 등 상세 공개",
+          "description": "앞으로 은행권 의 이익 창출 현황과 사용처, 임직원 보수 등의 현황 등을 한 번에 모아볼 수 있게 됩니다.... 시중은행 (신한, 우리, SC제일, 하나, 국민, 씨티)과 지방 은행 (대구, 부산, 광주, 제주, 전북, 경남), 인터넷 전문은...",
+          "link": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=7807262&ref=A",
+          "pubDate": "Wed, 01 Nov 2023 12:00:00 +0900",
+          "displayDate": "2023. 11. 1. PM 12:00:00",
+          "source": "news.kbs.co.kr"
+        },
+        {
+          "title": "주담대 금리 7% 코앞까지…\"고정금리 대환이 방법\"",
+          "description": "고정금리로 대환 or 여윳돈 있다면 상환 금리가 다시 오름세를 보이자 은행권 에선 50년 만기 주담대가 반짝인기를 끌었다. 기존 대출자들은 만기가 긴 상품으로 갈아타면 원리금을 줄일 수 있기 때문이다. 시중은행 ...",
+          "link": "https://view.asiae.co.kr/article/2023082510345936148",
+          "pubDate": "Sat, 26 Aug 2023 07:03:00 +0900",
+          "displayDate": "2023. 8. 26. AM 7:03:00",
+          "source": "view.asiae.co.kr"
+        },
+        {
+          "title": "Could the catfish effect work this time? (KOR)",
+          "description": "5대 시중은행 중심인 은행권 의 과점(寡占)을 깨겠다는 금융 당국의 구상이 나왔다.... 언제든 시중은행 ·지방 은행 · 인터넷 전문 은행 에 대한 인가 신청을 할 수 있다. 또 기존...",
+          "link": "https://koreajoongangdaily.joins.com/2023/07/07/englishStudy/bilingualNews/catfish-effect-major-banks-KakaoBank/20230707132737121.html",
+          "pubDate": "Fri, 07 Jul 2023 13:27:00 +0900",
+          "displayDate": "2023. 7. 7. PM 1:27:00",
+          "source": "koreajoongangdaily.joins.com"
+        },
+        {
+          "title": "‘금리 담합’ 조사까지 받는 은행 , 정말 경쟁 안 하는 걸까?[김도형의...",
+          "description": "지난달 금융위원회는 ‘ 은행권 경영·영업 관행·제도개선 TF’를 출범시켰는데요. TF에서는 △ 은행권 경쟁... 사실 국내에서는 5대 시중은행 외에도 다수의 지방 은행 과 외국계 은행 그리고 인터넷 전문 은행 까지 영업을...",
+          "link": "https://www.donga.com/news/Economy/article/all/20230318/118408315/1",
+          "pubDate": "Sat, 18 Mar 2023 16:01:00 +0900",
+          "displayDate": "2023. 3. 18. PM 4:01:00",
+          "source": "donga.com"
+        },
+        {
+          "title": "[big story] 특판 적금·절세형 ISA, '금리 노마드족' 눈길 잡다",
+          "description": "은행권 에서 판매하는 ISA 상품에는 저축 은행 의 기본 금리가 적용된다. 저축 은행 들은 신용등급이 낮을수록 금리가 최대 연 7%까지 적용되고 낮아도 4~5%대 초반으로 비교적 높은 금리를 제공한다. 인터넷 전문 은행 들과...",
+          "link": "https://magazine.hankyung.com/money/article/202212194706c",
+          "pubDate": "Tue, 27 Dec 2022 08:04:00 +0900",
+          "displayDate": "2022. 12. 27. AM 8:04:00",
+          "source": "magazine.hankyung.com"
+        }
+      ]
     }
-  ],
-  "categories": {
-    "saemaeul": [
-      {
-        "title": "“사업자대출로 강남 아파트 샀다간 낭패”… 금감원, 하나·농협銀 현...",
-        "link": "https://www.dt.co.kr/article/12054407?ref=naver",
-        "source": "n.news.naver.com",
-        "pubDate": "2026-03-29T05:33:00.000Z"
-      },
-      {
-        "title": "신제천새마을금고, 장락지점 개점식 MG페스티벌 개최",
-        "link": "https://www.inews365.com/news/article.html?no=912547",
-        "source": "inews365.com",
-        "pubDate": "2026-03-29T05:26:00.000Z"
-      },
-      {
-        "title": "에스엠코어, 정기주총서 정관 변경·감사 선임 등 안건 가결",
-        "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=649101",
-        "source": "digitaltoday.co.kr",
-        "pubDate": "2026-03-29T05:24:00.000Z"
-      },
-      {
-        "title": "서초구, '비상경제대응 전담반' 본격 가동",
-        "link": "https://www.gukjenews.com/news/articleView.html?idxno=3542694",
-        "source": "gukjenews.com",
-        "pubDate": "2026-03-29T05:14:00.000Z"
-      },
-      {
-        "title": "전국 최초 '100만 자족도시' 퍼즐 위한 '파주형 지역공공은행' 본격화",
-        "link": "https://www.joongboo.com/news/articleView.html?idxno=363721094",
-        "source": "joongboo.com",
-        "pubDate": "2026-03-29T04:34:00.000Z"
-      },
-      {
-        "title": "금감원, 사업자대출 주택구입 유용 정조준…하나·농협銀 현장점검",
-        "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1703779",
-        "source": "ebn.co.kr",
-        "pubDate": "2026-03-29T04:26:00.000Z"
-      },
-      {
-        "title": "[포토뉴스]강릉시-강릉신협, 지방보조금 전용계좌 업무협약",
-        "link": "https://www.kwnews.co.kr/page/view/2026032912530098948",
-        "source": "n.news.naver.com",
-        "pubDate": "2026-03-29T04:15:00.000Z"
-      },
-      {
-        "title": "지역과 함께하는 금융·문화 복합공간, 신제천새마을금고 장락지점 개점",
-        "link": "http://www.cctimes.kr/news/articleView.html?idxno=898868",
-        "source": "cctimes.kr",
-        "pubDate": "2026-03-29T03:38:00.000Z"
-      }
-    ],
-    "nonghyup": [
-      {
-        "title": "은행 주담대 고정금리 7% 훌쩍…중동 전쟁에 상승 흐름",
-        "link": "https://www.kukinews.com/article/view/kuk202603290025",
-        "source": "kukinews.com",
-        "pubDate": "2026-03-29T05:44:00.000Z"
-      },
-      {
-        "title": "금감원, 강남3구 사업자대출 현장 점검 나선다",
-        "link": "http://www.segyebiz.com/newsView/20260329506717?OutUrl=naver",
-        "source": "segyebiz.com",
-        "pubDate": "2026-03-29T05:44:00.000Z"
-      },
-      {
-        "title": "은행 주담대 고정금리 7% 넘어…중동불안 등에 3년5개월내 최고",
-        "link": "https://www.ngonews.kr/news/articleView.html?idxno=227202",
-        "source": "ngonews.kr",
-        "pubDate": "2026-03-29T05:42:00.000Z"
-      },
-      {
-        "title": "구미농협·제주위미농협, 고향사랑기부금 1000만원 상호기부",
-        "link": "https://www.m-i.kr/news/articleView.html?idxno=1359268",
-        "source": "m-i.kr",
-        "pubDate": "2026-03-29T05:42:00.000Z"
-      },
-      {
-        "title": "환율 평균 1490원 육박 '역대 4위'…외인 역대급 이탈에 원화 가치 직격...",
-        "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000028098",
-        "source": "jnilbo.com",
-        "pubDate": "2026-03-29T05:41:00.000Z"
-      },
-      {
-        "title": "은행 주담대 고정금리 7% 넘어…중동불안 등에 3년5개월내 최고",
-        "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005800237",
-        "source": "mbnmoney.mbn.co.kr",
-        "pubDate": "2026-03-29T05:38:00.000Z"
-      },
-      {
-        "title": "'영암쌀 통합RPC' 첫삽··· 年 3만톤 처리",
-        "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160273402078870",
-        "source": "siminilbo.co.kr",
-        "pubDate": "2026-03-29T05:36:00.000Z"
-      },
-      {
-        "title": "농협 대구본부, 동심협력 워크숍 개최",
-        "link": "https://www.kbmaeil.com/article/20260329500301",
-        "source": "kbmaeil.com",
-        "pubDate": "2026-03-29T05:34:00.000Z"
-      }
-    ],
-    "bank": [
-      {
-        "title": "금감원, 강남3구 사업자대출 현장 점검 나선다",
-        "link": "http://www.segyebiz.com/newsView/20260329506717?OutUrl=naver",
-        "source": "segyebiz.com",
-        "pubDate": "2026-03-29T05:44:00.000Z"
-      },
-      {
-        "title": "스테이블코인 ‘이자금지’ 논쟁, 韓 디지털화폐 구도 흔들",
-        "link": "https://www.etoday.co.kr/news/view/2570064",
-        "source": "etoday.co.kr",
-        "pubDate": "2026-03-29T05:38:00.000Z"
-      },
-      {
-        "title": "보금자리론, 금리 인상에도 매력 여전…대출 규제가 수요 견인",
-        "link": "https://www.etoday.co.kr/news/view/2570168",
-        "source": "etoday.co.kr",
-        "pubDate": "2026-03-29T05:06:00.000Z"
-      },
-      {
-        "title": "위탁업체의 신용정보유출도 은행 경영진 책임…4월 본격 적용",
-        "link": "https://biz.heraldcorp.com/article/10704931?ref=naver",
-        "source": "n.news.naver.com",
-        "pubDate": "2026-03-29T04:58:00.000Z"
-      },
-      {
-        "title": "금감원, 사업자대출 주택구입 유용 정조준…하나·농협銀 현장점검",
-        "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1703779",
-        "source": "ebn.co.kr",
-        "pubDate": "2026-03-29T04:26:00.000Z"
-      },
-      {
-        "title": "43조원 육박한 카드론…조달금리 4%대 돌파에 대출 금리 인상 우려",
-        "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202603271536286800960",
-        "source": "dnews.co.kr",
-        "pubDate": "2026-03-29T03:20:00.000Z"
-      },
-      {
-        "title": "은행 주담대 고정금리 7% 넘어...중동 혼란에 금리 줄인상 우려",
-        "link": "https://www.chosun.com/economy/economy_general/2026/03/29/XL5EXMUQVRH7VJJL5T5K5XIKX4/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-        "source": "n.news.naver.com",
-        "pubDate": "2026-03-29T03:19:00.000Z"
-      },
-      {
-        "title": "\"담보 대신 기술 본다\"..KB국민은행, 생산적금융 10조 금리우대",
-        "link": "http://www.4th.kr/news/articleView.html?idxno=2109708",
-        "source": "4th.kr",
-        "pubDate": "2026-03-29T03:04:00.000Z"
-      }
-    ]
-  }
+  ]
 }
