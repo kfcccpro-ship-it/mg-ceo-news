@@ -1,117 +1,184 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from "fs/promises";
 
-const NEWS_API_URL = 'https://openapi.naver.com/v1/search/news.json';
-const OUTPUT_PATH = path.resolve(process.cwd(), 'data/news.json');
-const DISPLAY_COUNT = 8;
-const CATEGORY_CONFIG = [
-  { key: 'saemaeul', label: '새마을금고', query: '새마을금고' },
-  { key: 'nonghyup', label: '농협', query: '농협' },
-  { key: 'bank', label: '은행권', query: '은행권' }
+const NAVER_CLIENT_ID = process.env.NAVER_CLIENT_ID;
+const NAVER_CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET;
+
+const OUTPUT_PATH = "data/news.json";
+
+const CATEGORIES = [
+  {
+    key: "saemaeul",
+    name: "새마을금고",
+    query: "새마을금고 OR MG새마을금고 OR 새마을금고중앙회",
+    include: [
+      "새마을금고",
+      "mg새마을금고",
+      "새마을금고중앙회",
+      "mg손해보험"
+    ],
+    exclude: [
+      "지역공공은행",
+      "비상경제대응",
+      "자족도시",
+      "전담반",
+      "서초구",
+      "공공은행"
+    ],
+    strictTitle: true
+  },
+  {
+    key: "nonghyup",
+    name: "농협",
+    query: "농협 OR NH농협 OR 농협은행 OR 농협중앙회",
+    include: [
+      "농협",
+      "nh농협",
+      "농협은행",
+      "농협중앙회",
+      "지역농협"
+    ],
+    exclude: [],
+    strictTitle: true
+  },
+  {
+    key: "bank",
+    name: "은행권",
+    query: "은행 OR 은행권 OR 시중은행 OR 인터넷은행",
+    include: [
+      "은행",
+      "은행권",
+      "시중은행",
+      "인터넷은행",
+      "국민은행",
+      "신한은행",
+      "하나은행",
+      "우리은행",
+      "기업은행",
+      "농협은행",
+      "부산은행",
+      "대구은행",
+      "광주은행",
+      "전북은행",
+      "경남은행",
+      "카카오뱅크",
+      "토스뱅크",
+      "케이뱅크"
+    ],
+    exclude: [],
+    strictTitle: false
+  }
 ];
 
-const clientId = process.env.NAVER_CLIENT_ID;
-const clientSecret = process.env.NAVER_CLIENT_SECRET;
-
-if (!clientId || !clientSecret) {
-  console.error('NAVER_CLIENT_ID 또는 NAVER_CLIENT_SECRET 이 설정되지 않았습니다.');
-  process.exit(1);
+function stripHtml(text = "") {
+  return text
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-const stripHtml = (text = '') => text.replace(/<[^>]*>/g, '').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
-const toIso = (value) => {
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
-};
-
-function dedupeItems(items) {
-  const seen = new Set();
-  return items.filter((item) => {
-    const key = `${item.title}|${item.link}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+function normalize(text = "") {
+  return stripHtml(text).toLowerCase();
 }
 
-function sortByDateDesc(items) {
-  return [...items].sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0));
+function isRelevant(item, category) {
+  const title = normalize(item.title);
+  const desc = normalize(item.description);
+  const full = `${title} ${desc}`;
+
+  const includes = category.include.map(k => k.toLowerCase());
+  const excludes = category.exclude.map(k => k.toLowerCase());
+
+  const included = category.strictTitle
+    ? includes.some(k => title.includes(k))
+    : includes.some(k => full.includes(k));
+
+  const excluded = excludes.some(k => full.includes(k));
+
+  return included && !excluded;
 }
 
-function scoreItem(item, label) {
-  const title = item.title || '';
-  let score = 0;
-  if (title.includes(label)) score += 5;
-  if (/속보|단독|긴급|점검|강화|개선|확대|경쟁|건전성|금리/.test(title)) score += 3;
-  const ageHours = item.pubDate ? Math.max(0, (Date.now() - new Date(item.pubDate).getTime()) / 36e5) : 100;
-  score += Math.max(0, 10 - ageHours / 3);
-  return score;
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
 }
 
-async function fetchCategory(config) {
-  const url = new URL(NEWS_API_URL);
-  url.searchParams.set('query', config.query);
-  url.searchParams.set('display', String(DISPLAY_COUNT));
-  url.searchParams.set('sort', 'date');
+function extractSource(url) {
+  try {
+    return new URL(url).hostname.replace("www.", "");
+  } catch {
+    return "";
+  }
+}
 
-  const response = await fetch(url, {
+async function fetchNews(query) {
+  const url = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(query)}&display=40&sort=date`;
+
+  const res = await fetch(url, {
     headers: {
-      'X-Naver-Client-Id': clientId,
-      'X-Naver-Client-Secret': clientSecret
+      "X-Naver-Client-Id": NAVER_CLIENT_ID,
+      "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
     }
   });
 
-  if (!response.ok) {
-    throw new Error(`${config.label} 호출 실패: ${response.status} ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  const items = (data.items || []).map((item) => ({
-    title: stripHtml(item.title),
-    link: item.originallink || item.link,
-    source: stripHtml(item.publisher || extractSourceFromLink(item.link) || '네이버 뉴스'),
-    pubDate: toIso(item.pubDate)
-  }));
-
-  return sortByDateDesc(dedupeItems(items));
+  const data = await res.json();
+  return data.items || [];
 }
 
-function extractSourceFromLink(link = '') {
-  try {
-    const host = new URL(link).hostname.replace(/^www\./, '');
-    return host;
-  } catch {
-    return '';
+async function collectCategory(category) {
+  const raw = await fetchNews(category.query);
+
+  const filtered = raw
+    .map(item => ({
+      title: stripHtml(item.title),
+      description: stripHtml(item.description),
+      link: item.originallink || item.link,
+      pubDate: item.pubDate,
+      displayDate: formatDate(item.pubDate),
+      source: extractSource(item.originallink || item.link)
+    }))
+    .filter(item => isRelevant(item, category));
+
+  const unique = [];
+  const seen = new Set();
+
+  for (const item of filtered) {
+    if (!seen.has(item.link)) {
+      seen.add(item.link);
+      unique.push(item);
+    }
   }
+
+  return {
+    key: category.key,
+    name: category.name,
+    items: unique.slice(0, 12)
+  };
 }
 
 async function main() {
-  const categories = {};
-  for (const config of CATEGORY_CONFIG) {
-    categories[config.key] = await fetchCategory(config);
+  const sections = [];
+
+  for (const category of CATEGORIES) {
+    const result = await collectCategory(category);
+    sections.push(result);
   }
 
-  const topStories = dedupeItems(
-    CATEGORY_CONFIG.flatMap((config) => categories[config.key].map((item) => ({ ...item, categoryLabel: config.label, score: scoreItem(item, config.label) })))
-  )
-    .sort((a, b) => b.score - a.score || new Date(b.pubDate || 0) - new Date(a.pubDate || 0))
-    .slice(0, 3)
-    .map(({ score, categoryLabel, ...rest }) => rest);
+  const now = new Date();
 
-  const totalCount = Object.values(categories).reduce((sum, items) => sum + items.length, 0);
-
-  const payload = {
-    updatedAt: new Date().toISOString(),
-    totalCount,
-    topStories,
-    categories
+  const output = {
+    updatedAt: now.toISOString(),
+    updatedLabel: now.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" }),
+    sections
   };
 
-  await fs.writeFile(OUTPUT_PATH, JSON.stringify(payload, null, 2), 'utf8');
-  console.log(`[OK] wrote ${OUTPUT_PATH}`);
+  await fs.writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2));
+  console.log("뉴스 데이터 업데이트 완료");
 }
 
-main().catch((error) => {
-  console.error(error);
+main().catch(err => {
+  console.error(err);
   process.exit(1);
 });
