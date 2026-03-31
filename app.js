@@ -1,125 +1,161 @@
-const CATEGORY_ORDER = [
-  { key: 'saemaeul', label: '새마을금고' },
-  { key: 'nonghyup', label: '농협' },
-  { key: 'bank', label: '은행권' }
-];
+let data = [];
+let quiz = [];
+let currentScope = { part: "", chapter: "" };
 
-const FONT_STORAGE_KEY = 'mg-news-font-size';
-const READ_STORAGE_KEY = 'mg-news-read-links';
+function byId(id){ return document.getElementById(id); }
+function esc(str){ return String(str ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
 
-function formatDateTime(value) {
-  if (!value) return '업데이트 정보 없음';
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat('ko-KR', {
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit'
-  }).format(date);
+function setTab(tab, btn){
+  byId("searchTab").classList.toggle("active", tab === "search");
+  byId("quizTab").classList.toggle("active", tab === "quiz");
+  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+  if(btn){ btn.classList.add("active"); }
 }
 
-function escapeText(text = '') {
-  return String(text).replace(/\s+/g, ' ').trim();
+function findPreview(text, keyword, size=170){
+  const plain = String(text || "").replace(/\s+/g, " ").trim();
+  if(!plain) return "";
+  if(!keyword) return plain.slice(0, size) + (plain.length > size ? "..." : "");
+  const idx = plain.toLowerCase().indexOf(keyword.toLowerCase());
+  if(idx === -1) return plain.slice(0, size) + (plain.length > size ? "..." : "");
+  const start = Math.max(0, idx - 50);
+  const end = Math.min(plain.length, start + size);
+  return (start > 0 ? "..." : "") + plain.slice(start, end) + (end < plain.length ? "..." : "");
 }
 
-function getReadLinks() {
-  try {
-    return new Set(JSON.parse(localStorage.getItem(READ_STORAGE_KEY) || '[]'));
-  } catch {
-    return new Set();
-  }
+function markText(text, keyword){
+  const safe = esc(text);
+  if(!keyword) return safe;
+  const pattern = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return safe.replace(new RegExp(`(${pattern})`, "gi"), "<mark>$1</mark>");
 }
 
-function saveReadLink(url) {
-  const current = getReadLinks();
-  current.add(url);
-  localStorage.setItem(READ_STORAGE_KEY, JSON.stringify([...current]));
-}
-
-function applyFontSize(size) {
-  document.documentElement.setAttribute('data-font-size', size);
-  localStorage.setItem(FONT_STORAGE_KEY, size);
-  document.querySelectorAll('.size-btn').forEach((button) => {
-    button.classList.toggle('active', button.dataset.size === size);
+function groupedTOC(){
+  const map = new Map();
+  data.forEach(item => {
+    const part = item.part || "기타";
+    const chapter = item.chapter || "기타";
+    if(!map.has(part)) map.set(part, new Map());
+    const chMap = map.get(part);
+    if(!chMap.has(chapter)) chMap.set(chapter, 0);
+    chMap.set(chapter, chMap.get(chapter) + 1);
   });
+  return map;
 }
 
-function renderList(containerId, items) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
+function renderTOC(){
+  const map = groupedTOC();
+  byId("tocList").innerHTML = [...map.entries()].map(([part, chMap]) => {
+    const count = [...chMap.values()].reduce((a,b)=>a+b,0);
+    return `<div class="toc-part">
+      <button class="toc-part-head" onclick="toggleTocPart(this)">
+        <span>${esc(part)}</span>
+        <span><span>${count}조</span> <span class="toc-arrow">▶</span></span>
+      </button>
+      <div class="toc-chapters">
+        ${[...chMap.entries()].map(([chapter, cnt]) => `
+          <button class="toc-chapter" onclick="selectToc(${JSON.stringify(part)}, ${JSON.stringify(chapter)})">
+            <span>${esc(chapter)}</span><span>${cnt}조</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>`;
+  }).join("");
+}
 
-  if (!items?.length) {
-    const empty = document.createElement('li');
-    empty.innerHTML = '<div class="empty-state">현재 표시할 뉴스가 없습니다.</div>';
-    container.appendChild(empty);
+function toggleTocPart(btn){ btn.parentElement.classList.toggle("open"); }
+function openToc(){ byId("tocModal").classList.remove("hidden"); document.body.style.overflow = "hidden"; }
+function closeToc(){ byId("tocModal").classList.add("hidden"); document.body.style.overflow = ""; }
+function backdropClose(e){ if(e.target.id === "tocModal") closeToc(); }
+
+function selectToc(part, chapter){
+  currentScope = { part, chapter };
+  closeToc();
+  renderResults("", currentScope);
+}
+
+function renderResults(keyword="", scope=currentScope){
+  const results = data.filter(item => {
+    const scopeOk = (!scope.part || item.part === scope.part) && (!scope.chapter || item.chapter === scope.chapter);
+    const keywordOk = !keyword || [item.full_title, item.full_text, item.part, item.chapter].join(" ").toLowerCase().includes(keyword.toLowerCase());
+    return scopeOk && keywordOk;
+  });
+
+  byId("resultInfo").textContent = keyword
+    ? `검색 결과 ${results.length.toLocaleString()}개 조문`
+    : scope.chapter
+      ? `${scope.part} · ${scope.chapter} · ${results.length.toLocaleString()}개 조문`
+      : `전체 ${data.length.toLocaleString()}개 조문`;
+
+  byId("results").innerHTML = results.length
+    ? results.map(item => `
+      <article class="card result-card">
+        <div class="result-path">${esc([item.part, item.chapter, item.section].filter(Boolean).join(" · "))}</div>
+        <h3 class="result-title">${markText(item.full_title, keyword)}</h3>
+        <div class="result-preview">${markText(findPreview(item.full_text, keyword), keyword)}</div>
+      </article>
+    `).join("")
+    : `<div class="card result-card"><div class="result-preview">조건에 맞는 조문이 없습니다.</div></div>`;
+}
+
+function runSearch(){
+  const input = byId("searchInput");
+  const keyword = input.value.trim();
+  currentScope = { part: "", chapter: "" };
+  renderResults(keyword, currentScope);
+  input.blur();
+}
+
+function isBadQuiz(q){
+  const text = [q.source_part, q.source_title, q.source_text, q.statement, q.prompt].join(" ");
+  if(/부칙|시행일|경과조치/.test(text)) return true;
+  if(q.type === "ox"){
+    const s = String(q.statement || "");
+    if(s.length < 12) return true;
+    if(/본조신설|개정|별표|별지/.test(s)) return true;
+  }
+  if(q.type === "mcq"){
+    if(!Array.isArray(q.choices) || q.choices.length !== 4) return true;
+    if(q.choices.some(c => String(c).length < 12 || /본조신설|개정|별표|별지/.test(String(c)))) return true;
+  }
+  return false;
+}
+
+function startQuiz(){
+  const pool = quiz.filter(q => !isBadQuiz(q));
+  if(!pool.length){
+    byId("quizArea").innerHTML = `<div class="quiz-box">출제 가능한 문제가 없습니다.</div>`;
     return;
   }
-
-  const template = document.getElementById('storyTemplate');
-  const readLinks = getReadLinks();
-
-  items.forEach((item) => {
-    const clone = template.content.firstElementChild.cloneNode(true);
-    const link = clone.querySelector('.story-link');
-    const title = clone.querySelector('.story-title');
-    const meta = clone.querySelector('.story-meta');
-
-    link.href = item.link;
-    title.textContent = escapeText(item.title);
-    meta.textContent = [item.source, item.pubDate ? formatDateTime(item.pubDate) : null].filter(Boolean).join(' · ');
-
-    if (readLinks.has(item.link)) {
-      link.classList.add('read');
-    }
-
-    link.addEventListener('click', () => {
-      saveReadLink(item.link);
-      link.classList.add('read');
-    });
-
-    container.appendChild(clone);
-  });
-}
-
-function renderCounts(categories) {
-  document.getElementById('count-saemaeul').textContent = `${categories.saemaeul?.length || 0}건`;
-  document.getElementById('count-nonghyup').textContent = `${categories.nonghyup?.length || 0}건`;
-  document.getElementById('count-bank').textContent = `${categories.bank?.length || 0}건`;
-}
-
-function renderTopStories(items) {
-  renderList('topStories', items?.slice(0, 3) || []);
-}
-
-async function loadNews() {
-  try {
-    const response = await fetch('./data/news.json', { cache: 'no-store' });
-    const data = await response.json();
-
-    document.getElementById('updatedAt').textContent = formatDateTime(data.updatedAt);
-    document.getElementById('articleCount').textContent = `${data.totalCount || 0}건`;
-
-    renderTopStories(data.topStories || []);
-    renderList('list-saemaeul', data.categories?.saemaeul || []);
-    renderList('list-nonghyup', data.categories?.nonghyup || []);
-    renderList('list-bank', data.categories?.bank || []);
-    renderCounts(data.categories || {});
-  } catch (error) {
-    console.error(error);
-    ['topStories', 'list-saemaeul', 'list-nonghyup', 'list-bank'].forEach((id) => renderList(id, []));
-    document.getElementById('updatedAt').textContent = '불러오기 실패';
-    document.getElementById('articleCount').textContent = '0건';
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  let html = `<div class="quiz-box"><div class="quiz-meta">${esc(q.source_article_no)}${q.source_title ? `(${esc(q.source_title)})` : ""}</div>`;
+  if(q.type === "ox"){
+    html += `<div class="quiz-prompt">아래 문장이 맞는지 판단하세요.</div>
+      <div class="quiz-statement">${esc(q.statement || "")}</div>
+      <div class="quiz-options">
+        <button class="secondary-btn" onclick="answerQuiz(${q.answer === true})">O</button>
+        <button class="secondary-btn" onclick="answerQuiz(${q.answer === false})">X</button>
+      </div>`;
+  } else {
+    html += `<div class="quiz-prompt">옳은 내용을 고르세요.</div>
+      <div class="quiz-options">
+        ${q.choices.map((c, i) => `<button class="secondary-btn" onclick="answerQuiz(${i === q.answer_index})">${i+1}. ${esc(c)}</button>`).join("")}
+      </div>`;
   }
+  html += `<div id="quizResult" class="quiz-result"></div>
+    <div class="source-box"><strong>정확한 조문 보기</strong><div style="margin-top:8px">${esc(q.source_text || "")}</div></div></div>`;
+  byId("quizArea").innerHTML = html;
 }
 
-function initFontControls() {
-  const saved = localStorage.getItem(FONT_STORAGE_KEY) || 'medium';
-  applyFontSize(saved);
-  document.querySelectorAll('.size-btn').forEach((button) => {
-    button.addEventListener('click', () => applyFontSize(button.dataset.size));
-  });
+function answerQuiz(correct){
+  byId("quizResult").textContent = correct ? "정답입니다." : "오답입니다. 아래 조문을 확인하세요.";
 }
 
-initFontControls();
-loadNews();
+Promise.all([
+  fetch("data.json?v=8").then(r => r.json()),
+  fetch("quiz.json?v=8").then(r => r.json())
+]).then(([d, q]) => {
+  data = d; quiz = q; renderTOC(); renderResults();
+}).catch(() => {
+  byId("resultInfo").textContent = "데이터를 불러오지 못했습니다.";
+});
