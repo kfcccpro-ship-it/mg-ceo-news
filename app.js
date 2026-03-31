@@ -1,161 +1,185 @@
-let data = [];
-let quiz = [];
-let currentScope = { part: "", chapter: "" };
+const CATEGORY_META = {
+  saemaeul: { label: '새마을금고', icon: '🏦' },
+  nonghyup: { label: '농협', icon: '🌾' },
+  bank: { label: '은행', icon: '💳' }
+};
 
-function byId(id){ return document.getElementById(id); }
-function esc(str){ return String(str ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
-
-function setTab(tab, btn){
-  byId("searchTab").classList.toggle("active", tab === "search");
-  byId("quizTab").classList.toggle("active", tab === "quiz");
-  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-  if(btn){ btn.classList.add("active"); }
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
-function findPreview(text, keyword, size=170){
-  const plain = String(text || "").replace(/\s+/g, " ").trim();
-  if(!plain) return "";
-  if(!keyword) return plain.slice(0, size) + (plain.length > size ? "..." : "");
-  const idx = plain.toLowerCase().indexOf(keyword.toLowerCase());
-  if(idx === -1) return plain.slice(0, size) + (plain.length > size ? "..." : "");
-  const start = Math.max(0, idx - 50);
-  const end = Math.min(plain.length, start + size);
-  return (start > 0 ? "..." : "") + plain.slice(start, end) + (end < plain.length ? "..." : "");
+function formatDateTime(value) {
+  if (!value) return '-';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  return new Intl.DateTimeFormat('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
 }
 
-function markText(text, keyword){
-  const safe = esc(text);
-  if(!keyword) return safe;
-  const pattern = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return safe.replace(new RegExp(`(${pattern})`, "gi"), "<mark>$1</mark>");
-}
+function renderTopStories(items) {
+  const container = document.getElementById('topStories');
+  if (!container) return;
 
-function groupedTOC(){
-  const map = new Map();
-  data.forEach(item => {
-    const part = item.part || "기타";
-    const chapter = item.chapter || "기타";
-    if(!map.has(part)) map.set(part, new Map());
-    const chMap = map.get(part);
-    if(!chMap.has(chapter)) chMap.set(chapter, 0);
-    chMap.set(chapter, chMap.get(chapter) + 1);
-  });
-  return map;
-}
-
-function renderTOC(){
-  const map = groupedTOC();
-  byId("tocList").innerHTML = [...map.entries()].map(([part, chMap]) => {
-    const count = [...chMap.values()].reduce((a,b)=>a+b,0);
-    return `<div class="toc-part">
-      <button class="toc-part-head" onclick="toggleTocPart(this)">
-        <span>${esc(part)}</span>
-        <span><span>${count}조</span> <span class="toc-arrow">▶</span></span>
-      </button>
-      <div class="toc-chapters">
-        ${[...chMap.entries()].map(([chapter, cnt]) => `
-          <button class="toc-chapter" onclick="selectToc(${JSON.stringify(part)}, ${JSON.stringify(chapter)})">
-            <span>${esc(chapter)}</span><span>${cnt}조</span>
-          </button>
-        `).join("")}
+  if (!items || items.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        표시할 주요 기사가 없습니다.
       </div>
-    </div>`;
-  }).join("");
-}
-
-function toggleTocPart(btn){ btn.parentElement.classList.toggle("open"); }
-function openToc(){ byId("tocModal").classList.remove("hidden"); document.body.style.overflow = "hidden"; }
-function closeToc(){ byId("tocModal").classList.add("hidden"); document.body.style.overflow = ""; }
-function backdropClose(e){ if(e.target.id === "tocModal") closeToc(); }
-
-function selectToc(part, chapter){
-  currentScope = { part, chapter };
-  closeToc();
-  renderResults("", currentScope);
-}
-
-function renderResults(keyword="", scope=currentScope){
-  const results = data.filter(item => {
-    const scopeOk = (!scope.part || item.part === scope.part) && (!scope.chapter || item.chapter === scope.chapter);
-    const keywordOk = !keyword || [item.full_title, item.full_text, item.part, item.chapter].join(" ").toLowerCase().includes(keyword.toLowerCase());
-    return scopeOk && keywordOk;
-  });
-
-  byId("resultInfo").textContent = keyword
-    ? `검색 결과 ${results.length.toLocaleString()}개 조문`
-    : scope.chapter
-      ? `${scope.part} · ${scope.chapter} · ${results.length.toLocaleString()}개 조문`
-      : `전체 ${data.length.toLocaleString()}개 조문`;
-
-  byId("results").innerHTML = results.length
-    ? results.map(item => `
-      <article class="card result-card">
-        <div class="result-path">${esc([item.part, item.chapter, item.section].filter(Boolean).join(" · "))}</div>
-        <h3 class="result-title">${markText(item.full_title, keyword)}</h3>
-        <div class="result-preview">${markText(findPreview(item.full_text, keyword), keyword)}</div>
-      </article>
-    `).join("")
-    : `<div class="card result-card"><div class="result-preview">조건에 맞는 조문이 없습니다.</div></div>`;
-}
-
-function runSearch(){
-  const input = byId("searchInput");
-  const keyword = input.value.trim();
-  currentScope = { part: "", chapter: "" };
-  renderResults(keyword, currentScope);
-  input.blur();
-}
-
-function isBadQuiz(q){
-  const text = [q.source_part, q.source_title, q.source_text, q.statement, q.prompt].join(" ");
-  if(/부칙|시행일|경과조치/.test(text)) return true;
-  if(q.type === "ox"){
-    const s = String(q.statement || "");
-    if(s.length < 12) return true;
-    if(/본조신설|개정|별표|별지/.test(s)) return true;
-  }
-  if(q.type === "mcq"){
-    if(!Array.isArray(q.choices) || q.choices.length !== 4) return true;
-    if(q.choices.some(c => String(c).length < 12 || /본조신설|개정|별표|별지/.test(String(c)))) return true;
-  }
-  return false;
-}
-
-function startQuiz(){
-  const pool = quiz.filter(q => !isBadQuiz(q));
-  if(!pool.length){
-    byId("quizArea").innerHTML = `<div class="quiz-box">출제 가능한 문제가 없습니다.</div>`;
+    `;
     return;
   }
-  const q = pool[Math.floor(Math.random() * pool.length)];
-  let html = `<div class="quiz-box"><div class="quiz-meta">${esc(q.source_article_no)}${q.source_title ? `(${esc(q.source_title)})` : ""}</div>`;
-  if(q.type === "ox"){
-    html += `<div class="quiz-prompt">아래 문장이 맞는지 판단하세요.</div>
-      <div class="quiz-statement">${esc(q.statement || "")}</div>
-      <div class="quiz-options">
-        <button class="secondary-btn" onclick="answerQuiz(${q.answer === true})">O</button>
-        <button class="secondary-btn" onclick="answerQuiz(${q.answer === false})">X</button>
-      </div>`;
-  } else {
-    html += `<div class="quiz-prompt">옳은 내용을 고르세요.</div>
-      <div class="quiz-options">
-        ${q.choices.map((c, i) => `<button class="secondary-btn" onclick="answerQuiz(${i === q.answer_index})">${i+1}. ${esc(c)}</button>`).join("")}
-      </div>`;
+
+  container.innerHTML = items.map((item, index) => {
+    const category = CATEGORY_META[item.category] || { label: '기타', icon: '📰' };
+    return `
+      <article class="top-story-card">
+        <div class="top-story-rank">${index + 1}</div>
+        <div class="top-story-content">
+          <div class="top-story-meta">
+            <span class="badge">${category.icon} ${escapeHtml(category.label)}</span>
+            <span class="source">${escapeHtml(item.source || '출처 미상')}</span>
+          </div>
+          <h3 class="top-story-title">
+            <a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener noreferrer">
+              ${escapeHtml(item.title || '제목 없음')}
+            </a>
+          </h3>
+          <p class="top-story-desc">${escapeHtml(item.description || '')}</p>
+          <div class="top-story-date">${escapeHtml(item.pubDate || '')}</div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderList(elementId, items) {
+  const container = document.getElementById(elementId);
+  if (!container) return;
+
+  if (!items || items.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        기사 없음
+      </div>
+    `;
+    return;
   }
-  html += `<div id="quizResult" class="quiz-result"></div>
-    <div class="source-box"><strong>정확한 조문 보기</strong><div style="margin-top:8px">${esc(q.source_text || "")}</div></div></div>`;
-  byId("quizArea").innerHTML = html;
+
+  container.innerHTML = items.map((item) => `
+    <article class="news-item">
+      <h4 class="news-title">
+        <a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener noreferrer">
+          ${escapeHtml(item.title || '제목 없음')}
+        </a>
+      </h4>
+      <p class="news-desc">${escapeHtml(item.description || '')}</p>
+      <div class="news-meta">
+        <span>${escapeHtml(item.source || '출처 미상')}</span>
+        <span>${escapeHtml(item.pubDate || '')}</span>
+      </div>
+    </article>
+  `).join('');
 }
 
-function answerQuiz(correct){
-  byId("quizResult").textContent = correct ? "정답입니다." : "오답입니다. 아래 조문을 확인하세요.";
+function renderCounts(categories) {
+  const setCount = (id, count) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = `${count}건`;
+  };
+
+  setCount('count-saemaeul', categories.saemaeul?.length || 0);
+  setCount('count-nonghyup', categories.nonghyup?.length || 0);
+  setCount('count-bank', categories.bank?.length || 0);
 }
 
-Promise.all([
-  fetch("data.json?v=8").then(r => r.json()),
-  fetch("quiz.json?v=8").then(r => r.json())
-]).then(([d, q]) => {
-  data = d; quiz = q; renderTOC(); renderResults();
-}).catch(() => {
-  byId("resultInfo").textContent = "데이터를 불러오지 못했습니다.";
-});
+function normalizeData(data) {
+  const sections = Array.isArray(data.sections) ? data.sections : [];
+
+  const categories = {
+    saemaeul: sections.find((s) => s.key === 'saemaeul')?.items || [],
+    nonghyup: sections.find((s) => s.key === 'nonghyup')?.items || [],
+    bank: sections.find((s) => s.key === 'bank')?.items || []
+  };
+
+  categories.saemaeul = categories.saemaeul.map((item) => ({ ...item, category: 'saemaeul' }));
+  categories.nonghyup = categories.nonghyup.map((item) => ({ ...item, category: 'nonghyup' }));
+  categories.bank = categories.bank.map((item) => ({ ...item, category: 'bank' }));
+
+  const allItems = [
+    ...categories.saemaeul,
+    ...categories.nonghyup,
+    ...categories.bank
+  ];
+
+  return {
+    updatedAt: data.updatedAt,
+    categories,
+    totalCount: allItems.length,
+    topStories: allItems.slice(0, 3)
+  };
+}
+
+async function loadNews() {
+  try {
+    const response = await fetch('./data/news.json', { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const rawData = await response.json();
+    const data = normalizeData(rawData);
+
+    const updatedAtEl = document.getElementById('updatedAt');
+    const articleCountEl = document.getElementById('articleCount');
+
+    if (updatedAtEl) {
+      updatedAtEl.textContent = formatDateTime(data.updatedAt);
+    }
+
+    if (articleCountEl) {
+      articleCountEl.textContent = `${data.totalCount}건`;
+    }
+
+    renderTopStories(data.topStories);
+    renderList('list-saemaeul', data.categories.saemaeul);
+    renderList('list-nonghyup', data.categories.nonghyup);
+    renderList('list-bank', data.categories.bank);
+    renderCounts(data.categories);
+  } catch (error) {
+    console.error('뉴스 로드 실패:', error);
+
+    const updatedAtEl = document.getElementById('updatedAt');
+    const articleCountEl = document.getElementById('articleCount');
+
+    if (updatedAtEl) {
+      updatedAtEl.textContent = '불러오기 실패';
+    }
+
+    if (articleCountEl) {
+      articleCountEl.textContent = '0건';
+    }
+
+    renderTopStories([]);
+    renderList('list-saemaeul', []);
+    renderList('list-nonghyup', []);
+    renderList('list-bank', []);
+    renderCounts({
+      saemaeul: [],
+      nonghyup: [],
+      bank: []
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadNews);
