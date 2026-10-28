@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-28T01:54:21.503Z",
-  "updatedLabel": "2026. 10. 28. AM 10:54:21",
+  "updatedAt": "2026-10-28T10:27:37.852Z",
+  "updatedLabel": "2026. 10. 28. PM 7:27:37",
   "sections": [
     {
       "key": "saemaeul",
@@ -211,6 +211,14 @@
       "name": "은행권",
       "items": [
         {
+          "title": "\"해킹 해줘\" AI 딸깍에 전 금융권 줄줄이 털렸다",
+          "description": "브레이크뉴스 최애리 기자= 은행권 에서 시작된 인공지능(AI) 에이전트 해킹... 대형 시중은행 에서 고객정보 유출이 확인되며 시작됐다. 신한 은행 의 경우 고객...",
+          "link": "http://www.breaknews.com/1246366",
+          "pubDate": "Wed, 28 Oct 2026 14:08:00 +0900",
+          "displayDate": "2026. 10. 28. PM 2:08:00",
+          "source": "breaknews.com"
+        },
+        {
           "title": "[김보형의 뷰파인더]4개월 전부터 뜨거운 은행 연합회장선임 민간 윤종규...",
           "description": "은행권 수장이라는 상징성과 함께 7억원을 웃도는 두둑한 연봉까지 보장되는 전국 은행 연합회장의 임기... 올해 이사진은 △ 시중은행 협의회 대표 6인(KB국민·신한·하나·우리·SC제일·수협 은행 장) △특수 은행 협의회 대표...",
           "link": "https://magazine.hankyung.com/business/article/202607204666b",
@@ -297,14 +305,6 @@
           "pubDate": "Fri, 07 Jul 2023 13:27:00 +0900",
           "displayDate": "2023. 7. 7. PM 1:27:00",
           "source": "koreajoongangdaily.joins.com"
-        },
-        {
-          "title": "‘금리 담합’ 조사까지 받는 은행 , 정말 경쟁 안 하는 걸까?[김도형의...",
-          "description": "지난달 금융위원회는 ‘ 은행권 경영·영업 관행·제도개선 TF’를 출범시켰는데요. TF에서는 △ 은행권 경쟁... 사실 국내에서는 5대 시중은행 외에도 다수의 지방 은행 과 외국계 은행 그리고 인터넷 전문 은행 까지 영업을...",
-          "link": "https://www.donga.com/news/Economy/article/all/20230318/118408315/1",
-          "pubDate": "Sat, 18 Mar 2023 16:01:00 +0900",
-          "displayDate": "2023. 3. 18. PM 4:01:00",
-          "source": "donga.com"
         }
       ]
     }
